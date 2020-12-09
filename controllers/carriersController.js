@@ -1,29 +1,29 @@
 const express = require("express");
 const router = express.Router();
 
-const UserModel = require("../models").User;
+const CarrierModel = require("../models").Carrier;
 
 // GET USERS PROFILE
 router.get("/profile/:id", async (req, res) => {
-  let user = await UserModel.findByPk(req.params.id);
+  let user = await CarrierModel.findByPk(req.params.id);
   res.json({ user });
 });
 
 // GET ALL USERS
 router.get("/", async (req, res) => {
-  let users = await UserModel.findAll();
+  let users = await CarrierModel.findAll();
   res.json({ users });
 });
 
 // CREATE A NEW USER
 router.post("/", async (req, res) => {
-  let user = await UserModel.create(req.body);
+  let user = await CarrierModel.create(req.body);
   res.json({ user });
 });
 
 // UPDATE A USER
 router.put("/:id", async (req, res) => {
-  let user = await UserModel.update(req.body, {
+  let user = await CarrierModel.update(req.body, {
     where: { id: req.params.id },
     returning: true,
   });
@@ -32,11 +32,11 @@ router.put("/:id", async (req, res) => {
 
 // DELETE A USER
 router.delete("/:id", async (req, res) => {
-  await UserModel.destroy({
+  await CarrierModel.destroy({
     where: { id: req.params.id },
   });
   res.json({
-    message: `User with id ${req.params.id} was deleted`,
+    message: `Carrier with id ${req.params.id} was deleted`,
   });
 });
 module.exports = router;
