@@ -2,10 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 const UserModel = require("../models").User;
+const OrderModel = require('../models').Order;
 
 // GET USERS PROFILE
 router.get("/profile/:id", async (req, res) => {
-  let user = await UserModel.findByPk(req.params.id);
+  let user = await UserModel.findByPk(req.params.id, {
+    include: OrderModel
+  });
   res.json({ user });
 });
 

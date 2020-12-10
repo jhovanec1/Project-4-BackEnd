@@ -37,6 +37,8 @@ app.use("/api/auth", require("./controllers/authController.js"));
 app.use("/api/users", require("./controllers/usersController.js"));
 app.use("/api/carriers", require("./controllers/carriersController.js"));
 app.use("/api/restaurants", require("./controllers/restaurantsController.js"));
+app.use("/api/order", require("./controllers/orderController.js"));
+
 
 app.listen(process.env.PORT, () => {
   console.log("Nodemon listening");
