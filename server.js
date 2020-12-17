@@ -30,7 +30,7 @@ app.use(methodOverride("_method"));
 
 // HOMEPAGE
 app.get("/", (req, res) => {
-  res.json({ message: "express api app is working111" });
+  res.json({ message: "express api app is working, 12/17" });
 });
 
 app.use("/api/auth", require("./controllers/authController.js"));
