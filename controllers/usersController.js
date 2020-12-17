@@ -3,6 +3,7 @@ const router = express.Router();
 
 const UserModel = require("../models").User;
 const OrderModel = require('../models').Order;
+const RestaurantModel = require('../models').Restaurant;
 
 // GET USERS PROFILE
 router.get("/profile/:id", async (req, res) => {

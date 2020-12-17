@@ -3,11 +3,13 @@ const router = express.Router();
 
 const RestaurantModel = require("../models").Restaurant;
 const OrderModel = require("../models").Order;
+const CarrierModel = require("../models").Carrier;
+const UserModel = require("../models").User;
 
 // GET USERS PROFILE
 router.get("/profile/:id", async (req, res) => {
   let user = await RestaurantModel.findByPk(req.params.id, {
-    include: OrderModel
+    include: UserModel
   });
   res.json({ user });
 });

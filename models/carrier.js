@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'carrierId',
         otherKey: 'userId'
       })
+      Carrier.belongsToMany(models.Restaurant, {
+        through: 'Order',
+        foreignKey: 'carrierId',
+        otherKey: 'restaurantId'
+      })
     }
   };
   Carrier.init({

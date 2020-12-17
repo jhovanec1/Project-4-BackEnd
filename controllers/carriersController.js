@@ -7,10 +7,10 @@ const UserModel = require('../models').User;
 
 // GET CARRIER PROFILE
 router.get("/profile/:id", async (req, res) => {
-  let user = await CarrierModel.findByPk(req.params.id, {
+  let carrier = await CarrierModel.findByPk(req.params.id, {
     include: UserModel
   });
-  res.json({ user });
+  res.json({ carrier });
 });
 
 // GET ALL CARRIER

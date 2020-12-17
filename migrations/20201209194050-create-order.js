@@ -23,15 +23,22 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
+      isDelivered: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: new Date(),
+        get() {
+          return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
+        }
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: new Date(),
+        get() {
+          return moment(this.getDataValue('createdAt')).format('DD/MM/YYYY h:mm:ss');
+        }
       }
     });
   },

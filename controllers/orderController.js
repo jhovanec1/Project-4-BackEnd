@@ -15,6 +15,23 @@ router.get("/", async (req, res) => {
   res.json({ users });
 });
 
+router.get('/:id', async (req,res)=>{
+  let orders = await OrderModel.findAll({
+    where: {
+      userId: req.params.id
+    }
+  })
+  res.json({ orders });
+})
+router.get('/carrier/:id', async (req,res)=>{
+  let orders = await OrderModel.findAll({
+    where: {
+      carrierId: req.params.id
+    }
+  })
+  res.json({ orders });
+})
+
 // CREATE A NEW ORDER
 router.post("/", async (req, res) => {
   let user = await OrderModel.create(req.body);

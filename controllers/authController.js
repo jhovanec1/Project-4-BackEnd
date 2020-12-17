@@ -37,9 +37,10 @@ router.post("/signup/user", (req, res) => {
             }
           );
           console.log(token);
+          info = newUser.id
           // res.cookie("jwt", token); // SEND A NEW COOKIE TO THE BROWSER TO STORE TOKEN
           // res.redirect(`/users/profile/${newUser.id}`);
-          res.json({ token });
+          res.json({ info });
         })
         .catch((err) => {
           console.log(err);
@@ -140,9 +141,42 @@ router.post("/login", (req, res) => {
             }
           );
           console.log(token);
+          info = foundUser.id
           // res.cookie("jwt", token); // SEND A NEW COOKIE TO THE BROWSER TO STORE TOKEN
           // res.redirect(`/users/profile/${foundUser.id}`);
-          res.json({ token });
+          res.json({ info });
+        } else {
+          return res.sendStatus(400);
+        }
+      });
+    }
+  });
+});
+// CARRIER LOGIN
+router.post("/login/carrier", (req, res) => {
+  CarrierModel.findOne({
+    where: {
+      username: req.body.username,
+    },
+  }).then((foundUser) => {
+    if (foundUser) {
+      bcrypt.compare(req.body.password, foundUser.password, (err, match) => {
+        if (match) {
+          const token = jwt.sign(
+            {
+              username: foundUser.username,
+              id: foundUser.id,
+            },
+            process.env.JWT_SECRET,
+            {
+              expiresIn: "30 days",
+            }
+          );
+          console.log(token);
+          info = foundUser.id
+          // res.cookie("jwt", token); // SEND A NEW COOKIE TO THE BROWSER TO STORE TOKEN
+          // res.redirect(`/users/profile/${foundUser.id}`);
+          res.json({ info });
         } else {
           return res.sendStatus(400);
         }

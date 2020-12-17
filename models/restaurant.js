@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Restaurant.hasMany(models.Order,{foreignKey: 'restaurantId'})
+      Restaurant.belongsToMany(models.Carrier, {
+        through: 'Order',
+        foreignKey: 'restaurantId',
+        otherKey: 'carrierId'
+      })
     }
   };
   Restaurant.init({
